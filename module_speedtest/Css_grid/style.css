@@ -1,0 +1,91 @@
+.container{
+    display:grid;
+    width: 75%;
+    /* margin-top:250px; */
+    margin:auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    /* grid-auto-rows: 5fr 2fr 1fr 4fr 1fr 4fr 2fr 1fr 1fr 2fr; */
+    grid-auto-rows: 80px;
+    grid-template-areas: 
+                        'header header nav1 nav2 nav3'
+                        'title title title title sidebar'
+                        'postmeta main main main sidebar'
+                        'postmeta main main main ads'
+                        'postmeta image image image ads'
+                        'postmeta image image image other'
+                        'postmeta image image image other'
+                        'footer footer footer footer footer'
+                        ;
+}
+.header{
+    padding:10px;
+    grid-area: header;
+    background-color: peru;
+}
+
+.nav1{
+    padding:10px;
+    grid-area: nav1;
+    background-color: pink;
+}
+
+.nav2{
+    padding:10px;
+    grid-area: nav2;
+    background-color: pink;
+}
+
+.nav3  {
+    padding:10px;
+    grid-area: nav3;
+    background-color: pink;
+}
+
+.title{
+    padding:10px;
+    grid-area: title;
+    background-color: lightblue;
+}
+
+.sidebar{
+    padding:10px;
+    grid-area: sidebar;
+    background-color: orange;
+}
+
+.postmeta{
+    padding:10px;
+    grid-area: postmeta;
+    background-color: lightgreen;
+}
+
+.main{
+    padding:10px;
+    grid-area: main;
+    background-color: gray;
+}
+
+.image{
+    padding:10px;
+    grid-area: image;
+    background-color: yellow;
+}
+
+.ads{
+    padding:10px;
+    grid-area: ads;
+    background-color: green;
+}
+
+.other{
+    padding:10px;
+    grid-area: other;
+    background-color: mediumorchid;
+}
+
+.footer{
+    padding:10px;
+    margin-bottom: 50px;
+    grid-area: footer;
+    background-color: rosybrown;
+}

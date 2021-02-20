@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Slider</title>
+</head>
+<style>
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: tan;
+}
+
+h2{
+text-align: center;
+margin-top: 150px;
+margin-bottom: 20px;
+}
+
+.card{
+    padding: 1rem;
+    background-color: #fff;
+    width: 500px;
+    margin: 0 auto;
+    min-height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 5px 12px rgba(0,0,0,.3);
+}
+
+.card .hasil_warna{
+    background-color: #fff;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 12px rgba(0,0,0,.3);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+input[type='range']{
+    width: 100%;
+    margin-top: 15px;
+}
+
+</style>
+<body>
+
+
+<h2>RGB SLIDER</h2>
+<div class="card">
+<div class="hasil_warna" id="hasil_warna"> rgb(0,0,0) </div>
+
+<label>Red </label>
+<input type="range" id="red" min="0" max="255">
+
+<label> Green</label>
+<input type="range" id="green" min="0" max="255">
+
+<label>Blue</label>
+<input type="range" id="blue" min="0" max="255">
+</div>
+
+<script src="rgb.js"></script>
+</body>
+</html>
