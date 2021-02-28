@@ -17,16 +17,10 @@ class Poll extends Model
         return User::find($this->created_by)->username;
     }
 
-    public function isAdmin()
-    {
-        return Auth()->user()->username('admin');
-    }
-
     public function isVoted()
     {
         //get user id
         $user_id = Auth()->user()->id;
-
         //Count voted
         $count = Votes::where('user_id', $user_id)->where('pool_id', $this->id)->count();
         return $count > 0;
@@ -37,18 +31,9 @@ class Poll extends Model
         return $this->deadline < Carbon::now();
     }
 
-    public function viewResult()
+    public function user()
     {
-        return $this->isVoted() || $this->isDeadline() || auth()->user()->id;
-    }
-
-    public function getResult()
-    {
-        if(!$this->viewResult()){
-            return null;
-        }
-
-        return $this->pollResult();
+      return $this->belongsTo(User::class, 'id', 'id');
     }
 
 }

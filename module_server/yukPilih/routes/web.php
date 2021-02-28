@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PollController;
+// use App\Http\Controllers\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +21,9 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [UserController::class, 'index']);
 Route::post('/proses_login', [UserController::class, 'store']);
+Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/home', [PollController::class, 'index']);
+Route::get('/tambah_poll', [PollController::class, 'create']);
+Route::post('/tambah_poll', [PollController::class, 'store']);
 
 

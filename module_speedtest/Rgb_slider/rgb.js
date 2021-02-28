@@ -12,11 +12,11 @@ function ubahWarna(){
 
     //ganti background
     const hex_color = '#'+pad(merah)+pad(hijau)+pad(biru);
-    hasil_warna.style.backgroundColor = hex_color
+    hasil_warna.style.backgroundColor = hex_color;
 
     //mengambil value
     const rgb_hex = `rgb(${red.value}, ${green.value}, ${blue.value})`;
-    hasil_warna.innerText= rgb_hex
+    hasil_warna.innerText= rgb_hex;
     
 }
 

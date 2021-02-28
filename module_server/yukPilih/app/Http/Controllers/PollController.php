@@ -18,8 +18,8 @@ class PollController extends Controller
      */
     public function index()
     {
-        $poll = Poll::all()->sortByDesc('created_at')->get();
-        
+        $poll = Poll::with('user')->orderBy('created_at', 'DESC')->get();
+        return view('home.index', compact('poll'));
     }
 
     /**
@@ -29,7 +29,18 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        $data = User::all();
+
+        $user = Auth::user();
+        //Jika user tidak admin
+        if(!$user->isAdmin()){
+          echo "Maaf hanya admin yang dapat menambahkan polling";
+            return back();
+        } else {
+            return view('home.tambah', compact('data'));
+        }
+
+
     }
 
     /**
@@ -40,7 +51,26 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // return $request;
+        // die;
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'deadline' => 'required|date',
+            'created_by' => 'required'
+        ]);
+
+        $poll = new Poll;
+        $poll->title = $request->title;
+        $poll->description = $request->description;
+        $poll->deadline = $request->deadline;
+        $poll->created_by = $request->created_by;
+        $poll->save();
+
+        return redirect('/home');
+      
     }
 
     /**

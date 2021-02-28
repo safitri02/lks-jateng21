@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phytons</title>
+</head>
+<style>
+
+    body{
+        background-color: #1c4e6b;
+    }
+
+    .app{
+        text-align: center;
+        /* align-items: center; */
+    }
+
+    #map{
+        margin: auto;
+        align-items: center !important;
+    }
+    .header{
+        padding-top: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        margin-left: 300px;
+    }
+    .header .judul{
+        margin-left: 170px;
+    }
+    .header .waktu{
+        margin-left: 170px;
+    }
+    
+
+
+</style>
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="score">Score : <p style="margin-top: -3px;" id="score">10</p></div>
+        <div class="judul">Phytons</div>
+        <div class="waktu">Waktu : <p style="margin-top:-3px" id="waktu">0.00.7</p></div>
+    </div>
+
+    <canvas id="map" width="650" height="600"></canvas>
+
+</div>
+
+<script src="js/snake.js"></script>
+</body>
+</html>

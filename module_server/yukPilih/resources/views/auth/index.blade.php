@@ -13,7 +13,7 @@
                     @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" id="username">
+                            <input type="text" name="username" autofocus autocomplete="off" class="form-control" id="username">
                             {{-- <div id="username" class="form-text">We'll never share your email with anyone else.</div> --}}
                         </div>
                         <div class="mb-3">

@@ -42,9 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function Devision()
+    public function isAdmin()
     {
-        return $this->belongsTo(Devision::class, 'devision_id', 'id');
+        return $this->role == "admin";
+    }
+
+    public function Division()
+    {
+        return $this->belongsTo(Division::class, 'division_id', 'id');
     }
 }

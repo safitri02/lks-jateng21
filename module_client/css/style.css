@@ -1,0 +1,22 @@
+body{
+    background-color: #1e272e;
+    height: 1024px;
+    width: 1024px;
+}
+
+header{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 500px; */
+    width: 1080px;
+    /* display: none; */
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+
+
+
+
