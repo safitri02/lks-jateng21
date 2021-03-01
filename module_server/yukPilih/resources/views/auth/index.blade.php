@@ -21,6 +21,7 @@
                             <input type="password" class="form-control" name="password" id="password">
                         </div>
                         <button type="submit" class="btn btn-primary">Masuk</button>
+                        <a href="/change_password">Change Password</a>
                     </form>
                 </div>
             </div>

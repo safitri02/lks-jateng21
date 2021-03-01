@@ -2,13 +2,8 @@ window.onload = function(){
     map = document.getElementById('map');
     ctx = map.getContext("2d");
     document.addEventListener("keydown", kontrol);
-    setInterval(game, 250); //kecepatan ular
-    score = document.getElementById('score');
-    // score.innerText= 'Hello';
+    setInterval(game, 250); //kecepatan ular  
 }
-
-width_x = 40;
-height_y = 38;
 
 ular_x=ular_y = 7; //titik awal ular
 game_setmap=ujung_map = 25;
@@ -16,6 +11,11 @@ buah_x = buah_y = 13; //titik awal buah
 x_kepala=y_kepala = 0;
 jejak = [];
 ekor = 1; //awal badan ular
+
+//Score ular
+let score = document.getElementById('score');
+score.innerText = ekor.length;
+
 
 function kontrol(tmb){
     switch(tmb.keyCode){
@@ -67,18 +67,19 @@ function game(){
 
         ctx.fillRect(jejak[i].x*game_setmap, jejak[i].y*game_setmap, game_setmap-1, game_setmap-1);
         if(jejak[i].x == ular_x && jejak[i].y == ular_y){
-            ekor = 6;
+            ekor = 6; //panjang ular awal
         }
     }
 
     jejak.push({x:ular_x, y:ular_y});
     while(jejak.length>ekor){
         jejak.shift();
-        score.innerText = ekor.length;
+
     }
 
     if(buah_x==ular_x && buah_y==ular_y){ //ketika ular nabrak buah
         ekor++;
+        //Buah random
         buah_x = Math.floor(Math.random()*ujung_map);
         buah_y = Math.floor(Math.random()*ujung_map);
     }
@@ -86,23 +87,18 @@ function game(){
     // if(x_kepala.x == ular_x.x && y_kepala.y== ular_y.y){ //jika ular tabrakan
     //     alert('Game Over');
     // }
-    
 
     ctx.fillStyle = "rgba(255,255,255,.7)"; //warna buah
     ctx.fillRect(buah_x*game_setmap, buah_y*game_setmap, game_setmap-1, game_setmap-1); //pembatas muncul buah
     
 }
 
+//Waktu
 
+var sec = 0;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+}, 1000);
 
-let waktu = document.getElementById('waktu');
-waktu.innerText= "Tes Waktu";
-  
-
-// function game_over(){
-//     let highScore = localStorage.getItem('highscore') == undefined ? 0 : localStorage.getItem('highscore');
-//     if(ekor > highscore) localStorage.setItem('highscore', ekor.length);
-
-//     highScore = localStorage.getItem('highscore');
-//     alert('Game Over. Your highscore: '+highScore);
-// }

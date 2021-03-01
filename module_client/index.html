@@ -35,6 +35,29 @@
     }
     .header .waktu{
         margin-left: 170px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .option .btn{
+        padding: 10px 15px;
+        margin-top: 20px;
+        text-align: center;
+        margin: 5px;
+        border: none;
+        border-radius: 20px;
+        font-size: 20px;
+    }
+
+    .option .rewind{
+        background-color: red;
+        color:white;
+    }
+
+    .option .cancel{
+        background-color:#acacac;
+        color:black;
+        display: none;
     }
     
 
@@ -47,13 +70,23 @@
     <div class="header">
         <div class="score">Score : <p style="margin-top: -3px;" id="score">10</p></div>
         <div class="judul">Phytons</div>
-        <div class="waktu">Waktu : <p style="margin-top:-3px" id="waktu">0.00.7</p></div>
+
+        <div class="waktu"> Time 
+        <span id="minutes" style="margin-left: 10px;"></span>:<span id="seconds"></span>
+        </div>
+
     </div>
 
     <canvas id="map" width="650" height="600"></canvas>
 
+    <div class="option">
+        <button class="btn cancel" id="cancel"> Cancel </button>
+        <button class="btn rewind" id="rewind"> Rewind </button>
+    </div>
+
 </div>
 
 <script src="js/snake.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
