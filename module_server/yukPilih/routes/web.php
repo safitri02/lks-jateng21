@@ -25,7 +25,7 @@ Route::get('/change_password', [UserController::class, 'reset']);
 Route::post('/change_password', [UserController::class, 'changePassword']);
 Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/home', [PollController::class, 'index']);
-Route::get('/tambah_poll', [PollController::class, 'create']);
+// Route::get('/tambah_poll', [PollController::class, 'create']);
 Route::post('/tambah_poll', [PollController::class, 'store']);
 
 

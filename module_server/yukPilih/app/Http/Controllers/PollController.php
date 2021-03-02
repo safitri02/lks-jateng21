@@ -11,110 +11,84 @@ use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $poll = Poll::with('user')->orderBy('created_at', 'DESC')->get();
         return view('home.index', compact('poll'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $data = User::all();
-
-        $user = Auth::user();
-        //Jika user tidak admin
-        if(!$user->isAdmin()){
-          echo "Maaf hanya admin yang dapat menambahkan polling";
-            return back();
-        } else {
-            return view('home.tambah', compact('data'));
-        }
-
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
+        $user = User::all();
+        if(!$user->isAdmin()){
+            echo "Hanya admin yang boleh menambah";
+        } else{
 
-        // return $request;
-        // die;
+            $request->validate([
+                'title' => 'required',
+                'description' => 'required',
+                'deadline' => 'required|date',
+                'created_by' => 'required'
+            ]);
+    
+            $created_by = Auth::user()->id;
+    
+            $poll = new Poll;
+            $poll->title = $request->title;
+            $poll->description = $request->description;
+            $poll->deadline = $request->deadline;
+            $poll->created_by = $created_by;
+            $poll->save();
+    
+            foreach($request->choice as $choice){
+                Choice::create([
+                    'choice' => $choice,
+                    'pool_id' => $poll->id
+                ]);
+            }
+    
+            return back();
+        }
 
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'deadline' => 'required|date',
-            'created_by' => 'required'
-        ]);
-
-        $poll = new Poll;
-        $poll->title = $request->title;
-        $poll->description = $request->description;
-        $poll->deadline = $request->deadline;
-        $poll->created_by = $request->created_by;
-        $poll->save();
-
-        return redirect('/home');
       
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Poll  $poll
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Poll $poll)
+    public function destroy(Poll $poll, $id)
     {
-        //
+        $poll = Poll::find($id);
+        $user = User::all();
+
+        if($user->isAdmin()){
+            echo "Hanya admin yg boleh menghapus";
+        } else{
+            $poll->delete();
+            return back();
+        }
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Poll  $poll
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Poll $poll)
+    public function vote(Poll $poll, Choice $choice)
     {
-        //
+        $user = User::all();
+        if($user->isAdmin()){
+            echo "Admin tidak boleh vote";
+        };
+
+        if(Carbon::parse($poll->deadline)->isAfter(now())){
+            echo "Voting sudah deadline";
+        }
+
+        Votes::create([
+            'choice_id' => $choice->id,
+            'user_id' => Auth::user()->id,
+            'pool_id' => $poll->id,
+            'division_id' => Auth::user()->devision_id
+        ]);
+
+        echo "Voting bErhasil";
+        return back();
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Poll  $poll
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Poll $poll)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Poll  $poll
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Poll $poll)
-    {
-        //
-    }
 }

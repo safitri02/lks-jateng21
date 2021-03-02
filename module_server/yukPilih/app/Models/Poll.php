@@ -12,28 +12,14 @@ class Poll extends Model
     protected $table = 'polls';
     protected $fillable = ['id', 'title', 'description', 'deadline', 'created_by'];
 
-    public function getCreator()
+    public function getCreatorAttibute()
     {
-        return User::find($this->created_by)->username;
-    }
-
-    public function isVoted()
-    {
-        //get user id
-        $user_id = Auth()->user()->id;
-        //Count voted
-        $count = Votes::where('user_id', $user_id)->where('pool_id', $this->id)->count();
-        return $count > 0;
-    }
-
-    public function isDeadline()
-    {
-        return $this->deadline < Carbon::now();
+        return $this->user->username;
     }
 
     public function user()
     {
-      return $this->belongsTo(User::class, 'id', 'id');
+      return $this->belongsTo(User::class, 'created_by');
     }
 
 }

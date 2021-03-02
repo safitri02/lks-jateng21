@@ -20,36 +20,39 @@
 <div class="container">
 <div class="row justify-content-center mt-5">
 <div class="col-md-9">
-<a href="/tambah_poll" class="mb-3 btn btn-primary">Tambah Polling</a>
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Judul</th>
-            <th>Deskripsi</th>
-            <th>Deadline</th>
-            <th> Dibuat Oleh </th>
-            <th>Aksi</th>
-        </tr>
-        <?php $no = 1; ?>
-        @foreach ($poll as $data)
-        <tr>
-            <td>{{ $no++ }}</td>
-            <td>{{ $data->title }}</td>
-            <td>{{ $data->description }}</td>
-            <td>{{ $data->deadline }}</td>
-            <td>{{ $data->user->username }}</td>
-            <th>
-                <a href="" class="btn btn-success btn-sm mb-2"> Vote </a>
-                <a href="" class="btn btn-success btn-primary btn-sm mb-2"> Lihat Hasil </a>
-                <a href="" class="btn btn-success btn-danger btn-sm mb-2"> Hapus </a>
-            </th>
-        </tr>
-        @endforeach
-    </table>
+<a href="" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Added Vote</a>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="card-link mr-auto">Destroy</a>
+  </div>
 </div>
 </div>
 
 </div>
+
+
+<!-- Modal -->
+<form action="/tambah_poll" method="post">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 @endsection
 
 @section('footer')
