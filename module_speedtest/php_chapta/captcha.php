@@ -14,8 +14,5 @@ imagefilledrectangle($gambar, 0, 0, 50, 20, $bg);
 imagestring($gambar, 10, 3, 3, $random, $tulisan);
 imagepng($gambar);
 
-
-
-
 ?>
 

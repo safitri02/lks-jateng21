@@ -13,7 +13,7 @@ jejak = [];
 ekor = 1; //awal badan ular
 
 //Score ular
-let score = document.getElementById('score');
+var score = document.getElementById('score');
 score.innerText = ekor.length;
 
 
@@ -74,7 +74,6 @@ function game(){
     jejak.push({x:ular_x, y:ular_y});
     while(jejak.length>ekor){
         jejak.shift();
-
     }
 
     if(buah_x==ular_x && buah_y==ular_y){ //ketika ular nabrak buah

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PollController;
+use App\Http\Controllers\PoolController;
 // use App\Http\Controllers\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +22,11 @@ use App\Http\Controllers\PollController;
 Route::get('/', [UserController::class, 'index']);
 Route::post('/proses_login', [UserController::class, 'store']);
 Route::get('/change_password', [UserController::class, 'reset']);
-Route::post('/change_password', [UserController::class, 'changePassword']);
+Route::post('/change_password', [UserController::class, 'resetPassword']);
 Route::get('/logout', [UserController::class, 'logout']);
-Route::get('/home', [PollController::class, 'index']);
-// Route::get('/tambah_poll', [PollController::class, 'create']);
-Route::post('/tambah_poll', [PollController::class, 'store']);
+Route::get('/home', [PoolController::class, 'index']);
+// Route::get('/tambah_poll', [PoolController::class, 'create']);
+Route::post('/tambah_poll', [PoolController::class, 'store']);
 
 
 

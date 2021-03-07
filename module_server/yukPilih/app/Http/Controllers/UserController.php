@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use Auth;
-// use App\Model\User;
 use Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +21,7 @@ class UserController extends Controller
 
         $auth = Auth::attempt(['username' => $user, 'password' => $pw]);
         if($auth){
-            return redirect ('/home');
+           return redirect('/home');
         } else{
             echo "Maaf username atau password salah";
             return back();
@@ -34,24 +33,21 @@ class UserController extends Controller
         return view('auth.reset');
     }
 
-    public function changePassword(Request $req)
+    public function resetPassword(Request $req)
     {
-        $user = User::all();
+            $old = $req->old_password;
+            $new = $req->new_password;
 
-            $req->validate([
-                'old_password' => 'required|string|max:20',
-                'new_password' => 'required|string|max:20',
-            ]);
-
-            $auth = Auth()->user();
-            if(!Hash::check($req->old_password, $auth->password)){
+            if(!Hash::check($old, auth()->user()->password)){
                 echo "Password lama tidak sama";
             }
-            $auth->password = bcrypt($req->new_password);
-            $auth->save();
+
+            $user = User::find(auth()->user()->id);
+            $user->password = Hash::make($new);
+            $user->save();
 
             Auth::logout();
-            return redirect('/');
+            echo "Password berhasil direset";
     
     }
 
