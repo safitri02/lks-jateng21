@@ -34,7 +34,9 @@
     <p>{{ $object->description }}</p>
 
     <div class="votes">
-        <button class="btn btn-primary btn-block"> gvjgj </button>
+        @foreach ($object->choices as $choice )
+          <a href="/vote/{{ $object->id }}" class="btn btn-primary btn-block"> {{ $choice->choice }} </a href="">
+        @endforeach
     </div>
     <div class="results">
         <div class="result mt-2">

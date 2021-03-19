@@ -27,6 +27,7 @@ Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/home', [PoolController::class, 'index']);
 // Route::get('/tambah_poll', [PoolController::class, 'create']);
 Route::post('/tambah_poll', [PoolController::class, 'store']);
+Route::get('/vote/{id}', [PoolController::class, 'vote']);
 
 
 

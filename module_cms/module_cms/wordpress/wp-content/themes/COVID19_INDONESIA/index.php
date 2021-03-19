@@ -65,8 +65,6 @@
         }
     ?>
     
-    
-    
 <div class="event">
 <h2 class="text-center mt-5 mb-5 text-biru">Semua Events COVID-19</h2>
     <div class="row">

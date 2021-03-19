@@ -12,10 +12,14 @@ use Illuminate\Http\Request;
 class PoolController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware(['admin'])->only(['store','destroy']);
+        $this->middleware(['user'])->only('vote');
+    }
+
     public function index()
     {
         $pool = Pool::with('user','choices','votes')->orderBy('created_at', 'DESC')->get();
-        // $choice = Choice::with('pool')->where('pool_id', 'id')->get();
         return view('home.index', compact('pool'));
     }
  
@@ -38,6 +42,7 @@ class PoolController extends Controller
             $pool->save();
 
             foreach($request->choice as $choices){
+                 
                 $choice = Choice::create([
                     'choice' => $choices,
                     'pool_id' => $pool->id
@@ -54,10 +59,6 @@ class PoolController extends Controller
         $user = User::all();
         $poll = Pool::find($pool_id);
         $choice = Choice::find($choice_id);
-
-        if($user->isAdmin()){
-            echo "Admin tidak boleh vote";
-        };
 
         if(!$poll || !$choice){
             echo "Invalid Choice";
@@ -88,12 +89,8 @@ class PoolController extends Controller
         $pool = Pool::find($id);
         $user = User::all();
 
-        if(!$user->isAdmin()){
-            echo "Hanya admin yg boleh menghapus";
-        } else{
-            $pool->delete();
-            return back();
-        }
+        $pool->delete();
+        return back();
         
     }
 
